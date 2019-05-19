@@ -51,14 +51,16 @@ class _MenuDashboardPageState extends State<MenuDashboardPage> {
 
   Widget dashboard(context) {
     return AnimatedPositioned(
-      duration: const Duration(milliseconds: 300),
+      duration: const Duration(milliseconds: 3000),
       top: isCollapsed ? 0 : 0.2 * screenHeight,
       bottom: isCollapsed ? 0 : 0.2 * screenHeight,
       left: isCollapsed ? 0 : 0.6 * screenWidth,
       right: isCollapsed ? 0 : -0.4 * screenWidth,
       child: Material(
+        animationDuration: Duration(milliseconds: 3000),
+        borderRadius: BorderRadius.all(Radius.circular(40)),
         elevation: 8,
-        color: backgroundColor,
+        color: Colors.white,
         child: Container(
           padding: EdgeInsets.only(left: 16, right: 16, top: 48),
           child: Column(
@@ -67,25 +69,29 @@ class _MenuDashboardPageState extends State<MenuDashboardPage> {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: <Widget>[
                   InkWell(
-                    child: Icon(
-                      Icons.menu,
-                      color: Colors.white,
-                    ),
-                    onTap: () {
-                      setState(() {
-                        isCollapsed = !isCollapsed;
-                      });
-                    },
-                  ),
-                  Text(
-                    'Dashboad For User',
-                    style: TextStyle(fontSize: 24, color: Colors.white),
-                  ),
-                  Icon(
-                    Icons.settings,
-                    color: Colors.white,
-                  )
+                      child: Icon(Icons.menu, color: Colors.black),
+                      onTap: () {
+                        setState(() {
+                          isCollapsed = !isCollapsed;
+                        });
+                      }),
+                  Text('Dashboad For User',
+                      style: TextStyle(fontSize: 24, color: Colors.black)),
+                  Icon(Icons.settings, color: Colors.black)
                 ],
+              ),
+              SizedBox(height: 50),
+              Container(
+                height: 200,
+                child: PageView(
+                  controller: PageController(viewportFraction: 0.8),
+                  scrollDirection: Axis.horizontal,
+                  pageSnapping: true,
+                  children: <Widget>[
+                    Container(margin: const EdgeInsets.symmetric(horizontal: 8), color: Colors.redAccent, width: 100,),
+                    Container(margin: const EdgeInsets.symmetric(horizontal: 8), color: Colors.blueAccent, width: 100,),
+                    Container(margin: const EdgeInsets.symmetric(horizontal: 8), color: Colors.greenAccent, width: 100,),
+                ],),
               )
             ],
           ),
