@@ -10,13 +10,13 @@ class MenuDashboardPage extends StatefulWidget {
 class _MenuDashboardPageState extends State<MenuDashboardPage> {
   bool isCollapsed = true;
   double screenWidth, screenHeight;
-
+  final Duration duration = const Duration(milliseconds: 300);
   @override
   Widget build(BuildContext context) {
     Size deviceSize = MediaQuery.of(context).size;
     screenHeight = deviceSize.height;
     screenWidth = deviceSize.width;
-    final Duration duration = const Duration(milliseconds: 300);
+    
     return Scaffold(
       backgroundColor: backgroundColor,
       body: Stack(
@@ -51,13 +51,13 @@ class _MenuDashboardPageState extends State<MenuDashboardPage> {
 
   Widget dashboard(context) {
     return AnimatedPositioned(
-      duration: const Duration(milliseconds: 3000),
+      duration: duration,
       top: isCollapsed ? 0 : 0.2 * screenHeight,
       bottom: isCollapsed ? 0 : 0.2 * screenHeight,
       left: isCollapsed ? 0 : 0.6 * screenWidth,
       right: isCollapsed ? 0 : -0.4 * screenWidth,
       child: Material(
-        animationDuration: Duration(milliseconds: 3000),
+        animationDuration: duration,
         borderRadius: BorderRadius.all(Radius.circular(40)),
         elevation: 8,
         color: Colors.white,
