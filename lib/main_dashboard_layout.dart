@@ -16,7 +16,7 @@ class _MenuDashboardPageState extends State<MenuDashboardPage> {
     Size deviceSize = MediaQuery.of(context).size;
     screenHeight = deviceSize.height;
     screenWidth = deviceSize.width;
-    
+
     return Scaffold(
       backgroundColor: backgroundColor,
       body: Stack(
@@ -38,6 +38,14 @@ class _MenuDashboardPageState extends State<MenuDashboardPage> {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
+            ClipOval(
+              child: Image.network(
+                'https://avatars2.githubusercontent.com/u/12724186?s=460&v=4',
+                height: 100,
+                width: 100,
+                fit: BoxFit.cover,
+              ),
+            ),
             new MenuItem(text: 'Dashboard'),
             new MenuItem(text: 'Messages'),
             new MenuItem(text: 'Utility Bills'),
@@ -88,10 +96,23 @@ class _MenuDashboardPageState extends State<MenuDashboardPage> {
                   scrollDirection: Axis.horizontal,
                   pageSnapping: true,
                   children: <Widget>[
-                    Container(margin: const EdgeInsets.symmetric(horizontal: 8), color: Colors.redAccent, width: 100,),
-                    Container(margin: const EdgeInsets.symmetric(horizontal: 8), color: Colors.blueAccent, width: 100,),
-                    Container(margin: const EdgeInsets.symmetric(horizontal: 8), color: Colors.greenAccent, width: 100,),
-                ],),
+                    Container(
+                      margin: const EdgeInsets.symmetric(horizontal: 8),
+                      color: Colors.redAccent,
+                      width: 100,
+                    ),
+                    Container(
+                      margin: const EdgeInsets.symmetric(horizontal: 8),
+                      color: Colors.blueAccent,
+                      width: 100,
+                    ),
+                    Container(
+                      margin: const EdgeInsets.symmetric(horizontal: 8),
+                      color: Colors.greenAccent,
+                      width: 100,
+                    ),
+                  ],
+                ),
               )
             ],
           ),
