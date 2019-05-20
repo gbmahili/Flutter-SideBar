@@ -60,7 +60,7 @@ class _MenuDashboardPageState extends State<MenuDashboardPage> {
         animationDuration: duration,
         borderRadius: BorderRadius.all(Radius.circular(40)),
         elevation: 8,
-        color: Colors.white,
+        color: backgroundColor,
         child: Container(
           padding: EdgeInsets.only(left: 16, right: 16, top: 48),
           child: Column(
@@ -69,15 +69,15 @@ class _MenuDashboardPageState extends State<MenuDashboardPage> {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: <Widget>[
                   InkWell(
-                      child: Icon(Icons.menu, color: Colors.black),
+                      child: Icon(Icons.menu, color: Colors.white),
                       onTap: () {
                         setState(() {
                           isCollapsed = !isCollapsed;
                         });
                       }),
                   Text('Dashboad For User',
-                      style: TextStyle(fontSize: 24, color: Colors.black)),
-                  Icon(Icons.settings, color: Colors.black)
+                      style: TextStyle(fontSize: 24, color: Colors.white)),
+                  Icon(Icons.settings, color: Colors.white)
                 ],
               ),
               SizedBox(height: 50),
