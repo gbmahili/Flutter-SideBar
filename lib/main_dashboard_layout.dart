@@ -14,11 +14,17 @@ class _MenuDashboardPageState extends State<MenuDashboardPage>
   final Duration duration = const Duration(milliseconds: 300);
   AnimationController _controller;
   Animation<double> _scaleAnimation;
+  Animation<double> _menuScaleAnimation;
+  Animation<Offset> _slideAnition;
   @override
   void initState() {
     super.initState();
     _controller = AnimationController(vsync: this, duration: duration);
     _scaleAnimation = Tween<double>(begin: 1, end: 0.6).animate(_controller);
+    _menuScaleAnimation =
+        Tween<double>(begin: 0.5, end: 1).animate(_controller);
+    _slideAnition = Tween<Offset>(begin: Offset(-1, 0), end: Offset(0, 0))
+        .animate(_controller);
   }
 
   @override
@@ -45,29 +51,35 @@ class _MenuDashboardPageState extends State<MenuDashboardPage>
   }
 
   Widget menu(context) {
-    return Padding(
-      padding: const EdgeInsets.only(left: 18.0),
-      child: Align(
-        alignment: Alignment.centerLeft,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            ClipOval(
-              child: Image.network(
-                'https://avatars2.githubusercontent.com/u/12724186?s=460&v=4',
-                height: 100,
-                width: 100,
-                fit: BoxFit.cover,
-              ),
+    return SlideTransition(
+      position: _slideAnition,
+      child: ScaleTransition(
+        scale: _menuScaleAnimation,
+        child: Padding(
+          padding: const EdgeInsets.only(left: 18.0),
+          child: Align(
+            alignment: Alignment.centerLeft,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                ClipOval(
+                  child: Image.network(
+                    'https://avatars2.githubusercontent.com/u/12724186?s=460&v=4',
+                    height: 100,
+                    width: 100,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+                new MenuItem(text: 'Dashboard'),
+                new MenuItem(text: 'Messages'),
+                new MenuItem(text: 'Utility Bills'),
+                new MenuItem(text: 'Funds Transfer'),
+                new MenuItem(text: 'Branches'),
+              ],
             ),
-            new MenuItem(text: 'Dashboard'),
-            new MenuItem(text: 'Messages'),
-            new MenuItem(text: 'Utility Bills'),
-            new MenuItem(text: 'Funds Transfer'),
-            new MenuItem(text: 'Branches'),
-          ],
+          ),
         ),
       ),
     );
@@ -100,7 +112,9 @@ class _MenuDashboardPageState extends State<MenuDashboardPage>
                         child: Icon(Icons.menu, color: Colors.white),
                         onTap: () {
                           setState(() {
-                            isCollapsed ? _controller.forward(): _controller.reverse();
+                            isCollapsed
+                                ? _controller.forward()
+                                : _controller.reverse();
                             isCollapsed = !isCollapsed;
                           });
                         }),
